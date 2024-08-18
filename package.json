@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "setup-venv": "if [ ! -d venv ]; then python3 -m venv venv && . venv/bin/activate && pip install -r requirements.txt; fi",
+    "flask-dev": ". venv/bin/activate && flask --app api/app run -p 5328",
+    "next-dev": "next dev",
+    "dev": "npm run setup-venv && npm run flask-dev & npm run next-dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
