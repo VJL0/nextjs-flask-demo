@@ -1,9 +1,14 @@
 import Dropdown from "@/components/Dropdown";
-import React from "react";
 
-const CustomizePage = async () => {
+const fetchPrograms = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/app`);
   const programs = await response.json();
+  return programs;
+};
+
+const Gettingstarted = async () => {
+  
+  const programs = await fetchPrograms();
 
   return (
     <div>
@@ -12,4 +17,4 @@ const CustomizePage = async () => {
   );
 };
 
-export default CustomizePage;
+export default Gettingstarted;
