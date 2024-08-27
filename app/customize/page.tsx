@@ -1,4 +1,4 @@
-import Dropdown from "@/components/Dropdown";
+//import Dropdown from "@/components/Dropdown";
 
 const CustomizePage = async () => {
   const response = await fetch(`${process.env.BASE_URL}/api/app`);
@@ -6,7 +6,7 @@ const CustomizePage = async () => {
 
   return (
     <div>
-      <Dropdown programs={programs} />
+      {programs}
     </div>
   );
 };
