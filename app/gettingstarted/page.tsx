@@ -1,10 +1,10 @@
-import Dropdown from "@/components/Dropdown";
+import ProgramDropdown from "@/components/ProgramDropdown";
 
 const Gettingstarted = () => {
-
   return (
     <div>
-      <Dropdown programs={["programs", "hey", "test"]} />
+      <h1>hey these are the programs</h1>
+      <ProgramDropdown />
     </div>
   );
 };

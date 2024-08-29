@@ -18,7 +18,7 @@ const Home = () => {
           journey simpler and more efficient.
         </p>
         <Button asChild size="lg">
-          <Link href="/customize" className="gap-1">
+          <Link href="/gettingstarted" className="gap-1">
             Get Started
             <ArrowRightIcon />
           </Link>

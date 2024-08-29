@@ -1,6 +1,6 @@
 "use client";
 
-import * as React from "react";
+import { useState } from "react";
 import { CaretSortIcon, CheckIcon } from "@radix-ui/react-icons";
 
 import { cn } from "@/lib/utils";
@@ -20,11 +20,13 @@ import {
 } from "@/components/ui/popover";
 
 interface DropdownProps {
-  programs: any[];
+  name: string;
+  data: string[];
 }
-const Dropdown = ({ programs }: DropdownProps) => {
-  const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
+
+const Dropdown: React.FC<DropdownProps> = ({ name, data }) => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
@@ -33,38 +35,38 @@ const Dropdown = ({ programs }: DropdownProps) => {
           variant="outline"
           role="combobox"
           aria-expanded={open}
+          aria-controls="dropdown-options"
           className="w-[200px] justify-between"
         >
-          {value
-            ? programs.find((program) => program === value)
-            : "Select program..."}
+          {value ? data.find((item) => item === value) : `Select ${name}...`}
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-[200px] p-0">
         <Command>
-          <CommandInput placeholder="Search program..." className="h-9" />
-          <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+          <CommandInput placeholder={`Search ${name}...`} className="h-9" />
+          <CommandList id="dropdown-options">
+            <CommandEmpty>No item found.</CommandEmpty>
             <CommandGroup>
-              {programs.map((program, index) => (
-                <CommandItem
-                  key={index}
-                  value={program}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
-                    setOpen(false);
-                  }}
-                >
-                  {program}
-                  <CheckIcon
-                    className={cn(
-                      "ml-auto h-4 w-4",
-                      value === program ? "opacity-100" : "opacity-0"
-                    )}
-                  />
-                </CommandItem>
-              ))}
+              {data &&
+                data.map((item) => (
+                  <CommandItem
+                    key={item}
+                    value={item}
+                    onSelect={(currentValue) => {
+                      setValue(currentValue === value ? "" : currentValue);
+                      setOpen(false);
+                    }}
+                  >
+                    {item}
+                    <CheckIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        value === item ? "opacity-100" : "opacity-0"
+                      )}
+                    />
+                  </CommandItem>
+                ))}
             </CommandGroup>
           </CommandList>
         </Command>
